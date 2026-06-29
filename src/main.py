@@ -9,7 +9,10 @@ def grayify(image):
 
 def pixels_to_characters(image, characters: str) -> str:
     return "".join(
-        (characters[pixel * len(characters) // 256 ] for pixel in image.get_flattened_data())
+        (
+            characters[pixel * len(characters) // 256]
+            for pixel in image.get_flattened_data()
+        )
     )
 
 
@@ -44,14 +47,13 @@ def get_optimal_art_size(
 
 
 def process_image(
-    image_path: str,
+    image,
     preferred_width: int | None = None,
     preferred_height: int | None = None,
     characters: str = "@#S%?*+;:,. ",
     invert: bool = False,
 ):
     characters = characters or "@#S%?*+;:,. "
-    image = PIL.Image.open(image_path)
 
     optimal_width, optimal_height = get_optimal_art_size(
         image=image,
@@ -89,7 +91,7 @@ def main():
         "-c",
         "--characters",
         required=False,
-        help="Character set for drawing, ordered from darkest to brightest.\nDefault: \" .:-=+*#%%@\"",
+        help='Character set for drawing, ordered from darkest to brightest.\nDefault: " .:-=+*#%%@"',
     )
 
     parser.add_argument(
@@ -101,7 +103,7 @@ def main():
     )
 
     parser.add_argument(
-            "-H",
+        "-H",
         "--output-height",
         required=False,
         help="Height of the output text art in characters.\nDefault: auto-calculated from image and terminal aspect ratio",
@@ -109,15 +111,18 @@ def main():
     )
 
     parser.add_argument(
-        "-i", "--invert", help="Invert the brightness mapping", action="store_true"
+        "-i",
+        "--invert",
+        help="Invert the brightness mapping",
+        action="store_true",
     )
     # TODO: --colored
 
     args = parser.parse_args()
+    image = PIL.Image.open(args.image_path)
 
-    # print(args.characters)
     result = process_image(
-        image_path=args.image_path,
+        image=image,
         preferred_width=args.output_width,
         preferred_height=args.output_height,
         characters=args.characters,
