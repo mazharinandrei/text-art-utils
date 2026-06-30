@@ -1,5 +1,5 @@
 from PIL import Image, ImageOps
-from terminal import get_optimal_art_size, convert_pixels_to_characters
+from src.terminal import get_optimal_art_size, convert_pixels_to_characters
 
 
 def grayify(image: Image):
