@@ -24,7 +24,7 @@ def iter_frames(video_path: str) -> Iterator[Image]:
     video_reading_process = (
         ffmpeg.input(video_path)
         .output("pipe:", format="rawvideo", pix_fmt="rgb24")
-        .run_async(pipe_stdout=True)
+        .run_async(pipe_stdout=True, quiet=True)
     )
 
     while True:
