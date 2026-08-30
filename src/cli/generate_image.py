@@ -1,6 +1,6 @@
 import argparse
 from PIL import Image
-from image import process_image
+from src.image import process_image
 
 
 def main():
