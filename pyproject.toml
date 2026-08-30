@@ -1,7 +1,7 @@
 [project]
-name = "text-art-generator"
+name = "text-art-utils"
 version = "0.1.0"
-description = "Add your description here"
+description = "utils for text art images and animations"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
